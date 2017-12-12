@@ -17,16 +17,23 @@ e = (0, 0, 0) #eyes and mouth
 b = (205, 205, 205) #background
 
 knight = [[
-	b, h, l, s, e, d, e, s,
-	h, h, l, s, s, d, s, s,
-	d, b, l, s, e, e, e, s,
-	b, l, b, l, s, s, s, d,
-	l, l, b, s, a, a, a, a,
-	l, d, s, a, a, l, a, a,
-	d, a, s, l, l, d, d, l,
-	b, b, b, a, a, b, a, a
-	],[
-	
+b, h, l, s, e, d, e, s,
+h, h, l, s, s, d, s, s,
+d, b, l, s, e, e, e, s,
+b, l, b, l, s, s, s, d,
+l, l, b, s, a, a, a, a,
+l, d, s, a, a, l, a, a,
+d, a, s, l, l, d, d, l,
+b, b, b, a, a, b, a, a
+],[
+b, h, l, s, e, d, e, s,
+h, h, l, s, s, d, s, s,
+d, b, l, s, e, e, e, s,
+b, l, b, l, s, s, s, d,
+l, l, b, s, a, a, a, a,
+l, d, s, a, a, l, a, a,
+d, a, s, l, l, d, d, l,
+b, b, b, a, a, b, a, a
 
 while True:
 	
