@@ -8,15 +8,16 @@ def animate(sense, slides, sleeptime):
 
 sense = SenseHat()
 
-h = (204, 157, 55) #horn
-l = (122, 122, 122) #light metal
-d = (85, 85, 85) #dark metal
-s = (234, 206, 138) #skin
-a = (125, 86, 33) #armor
+h = (216, 157, 28) #horn
+l = (100, 100, 115) #light metal
+d = (70, 70, 85) #dark metal
+s = (216, 180, 88) #skin
+a = (96, 66, 25) #armor
+o = (136, 86, 35) #shoe leather
 e = (0, 0, 0) #eyes and mouth
-b = (205, 205, 205) #background
+b = (180, 180, 180) #background
 
-knight = [[
+knight = [
 b, h, l, s, e, d, e, s,
 h, h, l, s, s, d, s, s,
 d, b, l, s, e, e, e, s,
@@ -24,16 +25,57 @@ b, l, b, l, s, s, s, d,
 l, l, b, s, a, a, a, a,
 l, d, s, a, a, l, a, a,
 d, a, s, l, l, d, d, l,
-b, b, b, a, a, b, a, a
+b, b, b, o, a, o, a, b
+]
+
+runningKnight = [[
+b, h, l, s, e, d, e, s,
+h, h, l, s, s, d, s, s,
+d, b, l, s, e, e, e, s,
+b, l, b, l, e, e, e, d,
+l, l, b, s, a, a, a, a,
+l, d, s, a, a, l, a, a,
+d, a, s, l, l, d, d, l,
+b, b, b, o, a, o, a, b
+],[
+b, b, l, l, d, d, d, l,
+b, h, l, s, e, d, e, s,
+h, h, l, s, s, d, s, s,
+d, b, l, s, e, e, e, s,
+b, l, b, l, e, e, e, d,
+l, l, s, a, a, l, a, a,
+l, d, s, l, l, d, d, l,
+d, a, b, o, o, a, b, b
 ],[
 b, h, l, s, e, d, e, s,
 h, h, l, s, s, d, s, s,
 d, b, l, s, e, e, e, s,
-b, l, b, l, s, s, s, d,
+b, l, b, l, e, e, e, d,
 l, l, b, s, a, a, a, a,
 l, d, s, a, a, l, a, a,
 d, a, s, l, l, d, d, l,
-b, b, b, a, a, b, a, a
+b, b, b, o, a, o, a, b
+],[
+b, b, l, l, d, d, d, l,
+b, h, l, s, e, d, e, s,
+h, h, l, s, s, d, s, s,
+d, b, l, s, e, e, e, s,
+b, l, b, l, e, e, e, d,
+l, l, s, a, a, l, a, a,
+l, d, s, l, l, d, d, l,
+d, a, b, o, a, b, o, a
+]]
 
 while True:
+	sense.set_pixels(knight)
+	x,y,z = sense.get_accelerometer_raw().values()
+	orientation = sense.get_orientation()
+
+	if (x > 1 or y > 1 or z > 1):
+		animate (sense, runningKnight, .1)
+		animate (sense, runningKnight, .1)
+		animate (sense, runningKnight, .1)
+		animate (sense, runningKnight, .1)
 	
+	if ((orientation['roll'] > 160 and orientation['roll'] < 180) or (orientation['yaw'] > 200 and orientation['yaw'] < 220)):
+		animate (sense, mead, .5)
