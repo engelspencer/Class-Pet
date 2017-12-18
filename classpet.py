@@ -34,7 +34,7 @@ d, a, s, l, l, d, d, l,
 b, b, b, o, a, o, a, b
 ]
 
-#entertain animation
+#what's better than charging your foes in a war cry
 chargingDovahkiin = [[
 b, h, l, s, e, d, e, s,
 h, h, l, s, s, d, s, s,
@@ -73,6 +73,7 @@ l, d, s, l, l, d, d, l,
 d, a, b, o, a, b, o, a
 ]]
 
+#mead and debauchery makes a happy and full Dovahkiin
 drinkingDovahkiin = [[
 b, b, b, b, b, b, d, d,
 b, b, b, b, b, d, l, l,
@@ -165,6 +166,7 @@ d, a, s, l, l, d, d, l,
 b, b, b, o, a, o, a, b
 ]]
 
+#death animation by means of dragon breath
 yolTorShul = [[
 h, b, b, b, b, b, b, b,
 b, b, b, b, b, b, b, b,
@@ -239,15 +241,18 @@ b, b, b, b, b, b, h, b,
 b, b, b, b, d, d, l, d
 ]]
 
+#pet's livelihood
 entertainment = 100
 hunger = 100
+alive = 1
 
-while True:
+#main loop
+while alive == 1:
 	sense.set_pixels(dovahkiin)
 	x,y,z = sense.get_accelerometer_raw().values()
 	orientation = sense.get_orientation()
 
-	if (x > 1 or y > 1 or z > 1):
+	if (x > 1.5 or y > 1.5 or z > 1.5):
 		animate (sense, chargingDovahkiin, .1)
 		animate (sense, chargingDovahkiin, .1)
 		animate (sense, chargingDovahkiin, .1)
@@ -258,4 +263,18 @@ while True:
 			entertainment = entertainment + 25
 	
 	if ((orientation['roll'] > 160 and orientation['roll'] < 180) or (orientation['yaw'] > 200 and orientation['yaw'] < 220)):
-		animate (sense, drinkingDovahkiin, .25)
+		animate (sense, drinkingDovahkiin, .35)
+		if (entertainment > 50):
+			entertainment = 100
+		else:
+			entertainment = entertainment + 50
+		hunger = 100
+
+	if (entertainment == 0 or hunger == 0):
+		animate (sense, yolTorShul, .25)
+		print ('The Dovahkiin has fallen.')
+		alive = 0
+
+	entertainment = entertainment - .1
+	hunger = hunger - .1
+	time.sleep(.1)
